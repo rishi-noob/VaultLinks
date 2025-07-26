@@ -190,7 +190,11 @@ const VaultLinksApp = () => {
       setLinks(response.data);
     } catch (error) {
       console.error('Failed to fetch links:', error);
-      setError('Failed to load links');
+      if (!isOnline) {
+        setError('You are offline. Links will sync when connection is restored.');
+      } else {
+        setError('Failed to load links');
+      }
     }
   };
 
