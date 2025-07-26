@@ -250,7 +250,11 @@ const VaultLinksApp = () => {
       fetchLinks();
     } catch (error) {
       console.error('Failed to delete link:', error);
-      setError('Failed to delete link');
+      if (!isOnline) {
+        setError('You are offline. Delete will sync when connection is restored.');
+      } else {
+        setError('Failed to delete link');
+      }
     }
   };
 
