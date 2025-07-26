@@ -446,6 +446,39 @@ const VaultLinksApp = () => {
             </div>
           )}
         </div>
+
+        {/* PWA Install Prompt */}
+        {showInstallPrompt && isInstallable && (
+          <div className="bg-indigo-600 text-white p-4 rounded-xl shadow-lg">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                <div>
+                  <p className="font-medium">Install VaultLinks</p>
+                  <p className="text-sm text-indigo-200">Get app-like experience on your device!</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={installPWA}
+                  className="bg-white text-indigo-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition duration-200"
+                >
+                  Install
+                </button>
+                <button
+                  onClick={() => setShowInstallPrompt(false)}
+                  className="text-indigo-200 hover:text-white p-1"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
