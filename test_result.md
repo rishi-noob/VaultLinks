@@ -180,9 +180,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Emergent Authentication Integration"
-    - "VaultLink CRUD Operations" 
     - "Authentication Flow"
+    - "Mobile-Optimized UI"
+    - "Link Management Interface"
   stuck_tasks: []
   test_all: true
   test_priority: "high_first"
