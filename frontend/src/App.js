@@ -155,6 +155,8 @@ const AuthProvider = ({ children }) => {
 // Main App Component
 const VaultLinksApp = () => {
   const { user, sessionToken, login, logout } = useAuth();
+  const { isInstallable, installPWA } = usePWAInstall();
+  const isOnline = useOnlineStatus();
   const [links, setLinks] = useState([]);
   const [formData, setFormData] = useState({
     url: '',
@@ -163,12 +165,24 @@ const VaultLinksApp = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showInstallPrompt, setShowInstallPrompt] = useState(false);
 
   useEffect(() => {
     if (user && sessionToken) {
       fetchLinks();
     }
   }, [user, sessionToken]);
+
+  // Show install prompt after user logs in and uses the app
+  useEffect(() => {
+    if (user && isInstallable && links.length > 0) {
+      const timer = setTimeout(() => {
+        setShowInstallPrompt(true);
+      }, 5000); // Show after 5 seconds of usage
+      
+      return () => clearTimeout(timer);
+    }
+  }, [user, isInstallable, links.length]);
 
   const fetchLinks = async () => {
     try {
