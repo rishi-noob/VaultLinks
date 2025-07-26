@@ -230,7 +230,11 @@ const VaultLinksApp = () => {
       fetchLinks();
     } catch (error) {
       console.error('Failed to create link:', error);
-      setError('Failed to save link');
+      if (!isOnline) {
+        setError('You are offline. Link will be saved when connection is restored.');
+      } else {
+        setError('Failed to save link');
+      }
     } finally {
       setLoading(false);
     }
